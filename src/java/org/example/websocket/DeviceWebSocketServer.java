@@ -49,7 +49,7 @@ public class DeviceWebSocketServer {
     public void handleMessage(String message, Session session) {
         try (JsonReader reader = Json.createReader(new StringReader(message))) {
             JsonObject jsonMessage = reader.readObject();                               // Get the msg in correct json format
-            System.out.println("\nSERVER\n"+jsonMessage + "\n");
+            Logger.getLogger(DeviceWebSocketServer.class.getName()).log(Level.INFO, "\nSERVER\n{0}\n", jsonMessage);
             if ("add".equals(jsonMessage.getString("action"))) {                        // If we are adding a device
                 Device device = new Device();                                           // Get a new device object
                 device.setName(jsonMessage.getString("name"));                          // Set its name to the name in the message
